@@ -301,6 +301,7 @@ fi
 # Build PyTorch with Gloo's TCP_TLS transport
 if [[ "$(uname)" == 'Linux' ]]; then
     export USE_GLOO_WITH_OPENSSL=1
+    export _GLIBCXX_USE_CXX11_ABI=1
 fi
 
 # Loop through all Python versions to build a package for each
