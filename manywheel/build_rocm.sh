@@ -143,7 +143,7 @@ OTHER_FILES=$(ls $ROCBLAS_LIB_SRC | grep -v gfx)
 ROCBLAS_LIB_FILES=($ARCH_SPECIFIC_FILES $OTHER_FILES)
 
 # MIOpen library files
-MIOPEN_SHARE_SRC=$ROCM_HOME/miopen/share/miopen/db
+MIOPEN_SHARE_SRC=$ROCM_HOME/share/miopen/db
 MIOPEN_SHARE_DST=share/miopen/db
 MIOPEN_SHARE_FILES=($(ls $MIOPEN_SHARE_SRC | grep -E $ARCH))
 
