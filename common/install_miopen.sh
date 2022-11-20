@@ -91,6 +91,9 @@ fi
 
 git clone https://github.com/ROCmSoftwarePlatform/MIOpen -b ${MIOPEN_BRANCH}
 pushd MIOpen
+if [[ $ROCM_INT -ge 50400 ]] && [[ $ROCM_INT -lt 50500 ]]; then
+    sed -i '/rocMLIR/d' requirements.txt
+fi
 ## MIOpen minimum requirements
 cmake -P install_deps.cmake --minimum
 ## Build MIOpen
