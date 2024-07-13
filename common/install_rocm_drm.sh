@@ -14,6 +14,9 @@ case "$ID" in
   centos)
     yum install -y libpciaccess-devel pkgconfig
     ;;
+  almalinux)
+    yum install -y libpciaccess-devel pkgconfig
+    ;;
   *)
     echo "Unable to determine OS..."
     exit 1
