@@ -136,6 +136,9 @@ FROM common as rocm_final
 ARG ROCM_VERSION=6.0
 ARG PYTORCH_ROCM_ARCH
 ENV PYTORCH_ROCM_ARCH ${PYTORCH_ROCM_ARCH}
+# Somewhere in ROCm stack, we still use non-existing /opt/rocm/hip path, 
+# below workaround helps avoid error
+ENV ROCM_PATH /opt/rocm
 ADD ./common/install_rocm_drm.sh install_rocm_drm.sh
 RUN bash ./install_rocm_drm.sh && rm install_rocm_drm.sh
 # cmake3 is needed for the MIOpen build
