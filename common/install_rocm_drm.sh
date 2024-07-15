@@ -11,10 +11,7 @@ case "$ID" in
     apt-get install -y libpciaccess-dev pkg-config
     apt-get clean
     ;;
-  centos)
-    yum install -y libpciaccess-devel pkgconfig
-    ;;
-  almalinux)
+  centos|almalinux)
     yum install -y libpciaccess-devel pkgconfig
     ;;
   *)
