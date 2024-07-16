@@ -120,10 +120,10 @@ ARG DEVTOOLSET_VERSION=11
 ENV PATH=/opt/rh/gcc-toolset-${DEVTOOLSET_VERSION}/root/usr/bin:$PATH
 ENV LD_LIBRARY_PATH=/opt/rh/gcc-toolset-${DEVTOOLSET_VERSION}/root/usr/lib64:/opt/rh/gcc-toolset-${DEVTOOLSET_VERSION}/root/usr/lib:$LD_LIBRARY_PATH
 
-# cmake-3.18.4 from pip
+# cmake-3.18.4 from pip; force in case cmake3 already exists
 RUN yum install -y python3-pip && \
     python3 -mpip install cmake==3.18.4 && \
-    ln -s /usr/local/bin/cmake /usr/bin/cmake3
+    ln -sf /usr/local/bin/cmake /usr/bin/cmake3
 
 FROM cpu_final as cuda_final
 RUN rm -rf /usr/local/cuda-${BASE_CUDA_VERSION}
@@ -139,8 +139,6 @@ ENV PYTORCH_ROCM_ARCH ${PYTORCH_ROCM_ARCH}
 ENV ROCM_PATH /opt/rocm
 ADD ./common/install_rocm_drm.sh install_rocm_drm.sh
 RUN bash ./install_rocm_drm.sh && rm install_rocm_drm.sh
-# cmake3 is needed for the MIOpen build
-RUN ln -sf /usr/local/bin/cmake /usr/bin/cmake3
 ADD ./common/install_rocm_magma.sh install_rocm_magma.sh
 RUN bash ./install_rocm_magma.sh && rm install_rocm_magma.sh
 ADD ./common/install_miopen.sh install_miopen.sh
