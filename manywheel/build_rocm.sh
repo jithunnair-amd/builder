@@ -116,7 +116,7 @@ if [[ $ROCM_INT -ge 60100 ]]; then
 fi
 
 OS_NAME=`awk -F= '/^NAME/{print $2}' /etc/os-release`
-if [[ "$OS_NAME" == *"CentOS Linux"* || "$OS_NAME" == "AlmaLinux" ]]; then
+if [[ "$OS_NAME" == *"CentOS Linux"* || "$OS_NAME" == *"AlmaLinux"* ]]; then
     LIBGOMP_PATH="/usr/lib64/libgomp.so.1"
     LIBNUMA_PATH="/usr/lib64/libnuma.so.1"
     LIBELF_PATH="/usr/lib64/libelf.so.1"
