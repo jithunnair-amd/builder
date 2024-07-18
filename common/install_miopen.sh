@@ -50,6 +50,9 @@ else
     ROCM_INSTALL_PATH="/opt/rocm-${ROCM_VERSION}"
 fi
 
+# Workaround since almalinux manylinux image already has this and cget doesn't like that
+rm -rf /usr/local/lib/pkgconfig/sqlite3.pc
+
 # MIOPEN_USE_HIP_KERNELS is a Workaround for COMgr issues
 MIOPEN_CMAKE_COMMON_FLAGS="
 -DMIOPEN_USE_COMGR=ON
@@ -57,8 +60,8 @@ MIOPEN_CMAKE_COMMON_FLAGS="
 "
 # Pull MIOpen repo and set DMIOPEN_EMBED_DB based on ROCm version
 if [[ $ROCM_INT -ge 60100 ]] && [[ $ROCM_INT -lt 60200 ]]; then
-    echo "ROCm 6.1 MIOpen does not need any patches, do not build from source"
-    exit 0
+    #echo "ROCm 6.1 MIOpen does not need any patches, do not build from source"
+    MIOPEN_BRANCH="release/rocm-rel-6.1"
 elif [[ $ROCM_INT -ge 60000 ]] && [[ $ROCM_INT -lt 60100 ]]; then
     echo "ROCm 6.0 MIOpen does not need any patches, do not build from source"
     exit 0
