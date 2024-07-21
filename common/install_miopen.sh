@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -ex
+# Don't use set -e since rocminfo failure 
+# due to /dev/kfd not being visible ends up being fatal
+set -x
 
 ROCM_VERSION=$1
 
@@ -95,7 +97,7 @@ else
     exit 1
 fi
 
-yum remove -y miopen-hip
+yum remove -y miopen-hip* --noautoremove
 
 git clone https://github.com/ROCm/MIOpen -b ${MIOPEN_BRANCH}
 pushd MIOpen
