@@ -58,16 +58,10 @@ MIOPEN_CMAKE_COMMON_FLAGS="
 # Pull MIOpen repo and set DMIOPEN_EMBED_DB based on ROCm version
 if [[ $ROCM_INT -ge 60300 ]] && [[ $ROCM_INT -lt 60400 ]]; then
     MIOPEN_BRANCH="release/rocm-rel-6.3"
-    echo "ROCm 6.3 MIOpen does not need any patches, do not build from source"
-    exit 0
 elif [[ $ROCM_INT -ge 60200 ]] && [[ $ROCM_INT -lt 60300 ]]; then
     MIOPEN_BRANCH="release/rocm-rel-6.2"
-    echo "ROCm 6.2 MIOpen does not need any patches, do not build from source"
-    exit 0
 elif [[ $ROCM_INT -ge 60100 ]] && [[ $ROCM_INT -lt 60200 ]]; then
     MIOPEN_BRANCH="release/rocm-rel-6.1"
-    echo "ROCm 6.1 MIOpen does not need any patches, do not build from source"
-    exit 0
 elif [[ $ROCM_INT -ge 60000 ]] && [[ $ROCM_INT -lt 60100 ]]; then
     echo "ROCm 6.0 MIOpen does not need any patches, do not build from source"
     exit 0
