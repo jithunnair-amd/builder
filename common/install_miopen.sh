@@ -59,7 +59,7 @@ MIOPEN_CMAKE_COMMON_FLAGS="
 if [[ $ROCM_INT -ge 60300 ]] && [[ $ROCM_INT -lt 60400 ]]; then
     MIOPEN_BRANCH="release/rocm-rel-6.3"
 elif [[ $ROCM_INT -ge 60200 ]] && [[ $ROCM_INT -lt 60300 ]]; then
-    MIOPEN_BRANCH="release/rocm-rel-6.2"
+    MIOPEN_BRANCH="bharriso/rocm-rel-6.2-filesystem-test"
 elif [[ $ROCM_INT -ge 60100 ]] && [[ $ROCM_INT -lt 60200 ]]; then
     MIOPEN_BRANCH="release/rocm-rel-6.1"
 elif [[ $ROCM_INT -ge 60000 ]] && [[ $ROCM_INT -lt 60100 ]]; then
