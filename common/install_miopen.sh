@@ -101,14 +101,8 @@ git clone https://github.com/ROCm/MIOpen -b ${MIOPEN_BRANCH}
 pushd MIOpen
 # remove .git to save disk space since CI runner was running out
 rm -rf .git
-# Don't build MLIR to save docker build time
-# since we are disabling MLIR backend for MIOpen anyway
-if [[ $ROCM_INT -ge 50400 ]] && [[ $ROCM_INT -lt 50500 ]]; then
-    sed -i '/rocMLIR/d' requirements.txt
-elif [[ $ROCM_INT -ge 50200 ]] && [[ $ROCM_INT -lt 50400 ]]; then
-    sed -i '/llvm-project-mlir/d' requirements.txt
-fi
-## MIOpen minimum requirements
+## MIOpen minimum requirements; don't rebuild CK as it's already installed with ROCm
+sed -i '/composable_kernel/d' requirements.txt
 cmake -P install_deps.cmake --minimum
 
 # clean up since CI runner was running out of disk space
@@ -124,7 +118,7 @@ cd build
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig CXX=${ROCM_INSTALL_PATH}/llvm/bin/clang++ cmake .. \
     ${MIOPEN_CMAKE_COMMON_FLAGS} \
     ${MIOPEN_CMAKE_DB_FLAGS} \
-    -DCMAKE_PREFIX_PATH="${ROCM_INSTALL_PATH}/hip;${ROCM_INSTALL_PATH}"
+    -DCMAKE_PREFIX_PATH="${ROCM_INSTALL_PATH}"
 make MIOpen -j $(nproc)
 
 # Build MIOpen package
