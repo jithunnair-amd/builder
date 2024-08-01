@@ -152,6 +152,13 @@ else
 fi
 
 if [[ "$DESIRED_CUDA" == *"rocm"* ]]; then
+    # Install AOTriton
+    if [ -e .ci/docker/aotriton_version.txt ]; then
+        cp -a .ci/docker/aotriton_version.txt aotriton_version.txt
+        bash ${SOURCE_DIR}/../common/install_aotriton.sh /opt/rocm && rm aotriton_version.txt
+        export AOTRITON_INSTALLED_PREFIX=/opt/rocm/aotriton
+    fi
+
     echo "Calling build_amd.py at $(date)"
     python tools/amd_build/build_amd.py
 fi
