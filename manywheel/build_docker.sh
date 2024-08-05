@@ -93,7 +93,7 @@ case ${GPU_ARCH_TYPE} in
 	    GPU_IMAGE=rocm/dev-almalinux-8:${GPU_ARCH_VERSION}-complete
 	fi
         DOCKER_GPU_BUILD_ARG="--build-arg ROCM_VERSION=${GPU_ARCH_VERSION} --build-arg PYTORCH_ROCM_ARCH=${PYTORCH_ROCM_ARCH} --build-arg DEVTOOLSET_VERSION=9"
-	;;
+        ;;
     xpu)
         TARGET=xpu_final
         DOCKER_TAG=xpu
