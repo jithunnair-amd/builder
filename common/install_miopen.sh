@@ -98,6 +98,8 @@ fi
 # Workaround since almalinux manylinux image already has this and cget doesn't like that
 rm -rf /usr/local/lib/pkgconfig/sqlite3.pc
 
+# Versioned package name needs regex match
+# Use --noautoremove to prevent other rocm packages from being uninstalled
 yum remove -y miopen-hip* --noautoremove
 
 git clone https://github.com/ROCm/MIOpen -b ${MIOPEN_BRANCH}
