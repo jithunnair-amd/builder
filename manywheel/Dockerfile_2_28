@@ -82,6 +82,7 @@ RUN yum install -y \
         xz \
         glibc-langpack-en
 
+# ius-release package needs epel-release-7
 RUN yum install -y \
     https://repo.ius.io/ius-release-el7.rpm \
     https://ossci-linux.s3.amazonaws.com/epel-release-7-14.noarch.rpm
