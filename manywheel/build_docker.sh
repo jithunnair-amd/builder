@@ -90,6 +90,7 @@ case ${GPU_ARCH_TYPE} in
         fi
         if [ ${GPU_ARCH_TYPE} == "rocm-manylinux_2_28" ]; then
             MANY_LINUX_VERSION="2_28"
+	    GPU_IMAGE=rocm/dev-almalinux-8:${GPU_ARCH_VERSION}-complete
 	fi
         DOCKER_GPU_BUILD_ARG="--build-arg ROCM_VERSION=${GPU_ARCH_VERSION} --build-arg PYTORCH_ROCM_ARCH=${PYTORCH_ROCM_ARCH} --build-arg DEVTOOLSET_VERSION=9"
 	;;
