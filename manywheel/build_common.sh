@@ -145,6 +145,7 @@ case ${DESIRED_PYTHON} in
     ;;
 esac
 
+# ROCm RHEL8 packages are built with cxx11 abi symbols
 if [[ "$DESIRED_DEVTOOLSET" == *"cxx11-abi"* || "$DESIRED_CUDA" == *"rocm"* ]]; then
     export _GLIBCXX_USE_CXX11_ABI=1
 else
