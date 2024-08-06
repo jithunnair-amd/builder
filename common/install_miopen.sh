@@ -51,8 +51,9 @@ MIOPEN_CMAKE_COMMON_FLAGS="
 "
 # Pull MIOpen repo and set DMIOPEN_EMBED_DB based on ROCm version
 if [[ $ROCM_INT -ge 60300 ]] && [[ $ROCM_INT -lt 60400 ]]; then
-    echo "ROCm 6.3 MIOpen does not need any patches, do not build from source"
-    exit 0
+    # TEMPORARY FOR ROCM6.3 MAINLINE: use std:filesystem atch
+    #echo "ROCm 6.3 MIOpen does not need any patches, do not build from source"
+    MIOPEN_BRANCH=amd-master
 elif [[ $ROCM_INT -ge 60200 ]] && [[ $ROCM_INT -lt 60300 ]]; then
     echo "ROCm 6.2 MIOpen does not need any patches, do not build from source"
     exit 0
@@ -75,6 +76,10 @@ rm -rf /usr/local/lib/pkgconfig/sqlite3.pc
 yum remove -y miopen-hip* --noautoremove
 
 git clone https://github.com/ROCm/MIOpen -b ${MIOPEN_BRANCH}
+# Pull MIOpen repo and set DMIOPEN_EMBED_DB based on ROCm version
+if [[ $ROCM_INT -ge 60300 ]] && [[ $ROCM_INT -lt 60400 ]]; then
+    curl -q https://github.com/ROCm/MIOpen/commit/f6c993171cb0a96ebcc220f84cb1b5b234bbae0f.diff | git apply
+fi
 pushd MIOpen
 # remove .git to save disk space since CI runner was running out
 rm -rf .git
