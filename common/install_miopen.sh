@@ -44,6 +44,9 @@ else
     ROCM_INSTALL_PATH="/opt/rocm-${ROCM_VERSION}"
 fi
 
+# Workaround since mainline ROCm images do not have /opt/rocm link
+ln -sf /opt/rocm-${ROCM_VERSION}* /opt/rocm
+
 # MIOPEN_USE_HIP_KERNELS is a Workaround for COMgr issues
 MIOPEN_CMAKE_COMMON_FLAGS="
 -DMIOPEN_USE_COMGR=ON
